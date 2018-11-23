@@ -1,40 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<form method="post" name="login" >
+		<input type="text" name="user">
+		<input type="text" name="pass">
+		<input type="submit" name="login" value="Logar">
+
+	</form>
+
+
+</body>
+</html>
+
 <?php
+
 session_start();
+
 include('PDO_conectadb.php');
 
-$stmt->conectar();
+if(isset($_POST['user'])){
+	$user = $_POST['user'];
+	$pass = $_POST['pass'];
 
-$stmt = $conn->query("SELECT usuario, senha FROM cliente WHERE usuario = :USUARIO and 
-	senha = :PASSWD");
+	$query = $conn->prepare("SELECT COUNT('id_cliente') FROM cliente WHERE usuario = :LOGIN AND senha = :PASSWD");
 
-$login = "rejane maria";
-$passwd = "oi123";
+//UPDATE cliente SET usuario = :LOGIN, senha = :PASSWD WHERE id_cliente = :ID");
 
-$stmt->bindValue(":USUARIO", $_POST['$login']);
-$stmt->bindValue(":PASSWD", md5($_POST['$passwd']));
-$stmt->execute();
+	$query->bindParam(":LOGIN", $user);
+	$query->bindParam(":PASSWD", md5($pass));
 
-if($stmt->rowCount() == 1){
+	$query->execute();
 
-	while($ln = $stmt->fetch(PDO::FETCH_ASSOC)){
+	$count = $query->fetchColumn();
 
-		$_SESSION['usuario'] = $ln['USUARIO'];
-        $_SESSION['senha'] = $ln['PASSWD'];
+	if ($count == 1){
+		$_SESSION['user'] = $user;
 
-        echo "<script>alert('Logado Com Sucesso'</script>";
-        echo session_id();
-
-	};
-}else{
-		echo "<script>alert('Usuarios Ou Senha Incorretos!');
-            top.location.href='PDO_inserindo.php';
-            </script>";
-            echo session_id();
+		header('location: main.php');
+	}
 }
 
-//echo "logado OK";
-
-var_dump($_SESSION);
-//https://www.youtube.com/watch?v=etcYlWwHAn0
-//https://www.youtube.com/watch?v=OQjESSU4Azw - baixado
 ?>
