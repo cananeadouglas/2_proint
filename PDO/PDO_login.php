@@ -48,7 +48,8 @@
 				<input type="submit" name="login" value="Logar">
 				<input type="reset" name="limpa" value="Limpar">
 
-			</form>
+			</form><br/>
+			<a href="PDO_inserindo.php">Cadastrar Novo Usuário</a>
 		</div>
 	</div>
 </body>

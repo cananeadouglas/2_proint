@@ -9,7 +9,7 @@
 	        <li><a href="main.php">Página Principal</a></li>
 	        <li><a href="#">Fotos</a></li>
 	        <li><a href="#">Eventos</a></li>
-	        <li><a href="#">Gerar Boleto</a></li>
+	        <li><a href="escolherbanco.php">Gerar Boleto</a></li>
 	        <li><a href="#">Fazer Pedido</a></li>
 	        <li><a href="#">Mapa do Condomínio</a></li>
 	        <li><a href="#">Fale Conosco</a></li>
